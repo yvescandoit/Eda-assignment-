@@ -1,0 +1,8 @@
+  
+NEI <- readRDS("summarySCC_PM25.rds")  ## Reading the dataset
+dat1 <- aggregate(Emissions~year,NEI,sum)  ## calculating total emission on the basis of year
+
+png("Plot1.R")
+Plot1.R <- plot(dat1$Group.1,dat1$x,pch=19,col="red",xlab = "years",ylab="amount of emission") ## plotting
+abline(lm(dat1$Emissions,dat1$year),lwd=4) ##regression line
+dev.off()
