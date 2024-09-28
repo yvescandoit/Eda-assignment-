@@ -1,0 +1,12 @@
+SCC <- readRDS("~/Downloads/Source_Classification_Code.rds") ##Reading the Source Code for finding Coal Combustion sources
+dat4 <- SCC[grep("Coal",SCC$EI.Sector),] ##Searching for keyword "Coal" in EI sector col
+dat.4 <- unique(dat4$SCC) ##getting the SCC values of coal related rows to later merge with NEI 
+dat.4 <- NEI[NEI$SCC %in% dat.4,] ##Subsetting NEI with SCC values that are present in dat.4(Coal related rows)
+maindata <- aggregate(Emissions ~ year,dat.4,sum)  ##Calculating the values of the dataset
+
+
+png("Plot4.R")
+ggplot(maindata,aes(factor(year),Emissions)) +
+  geom_bar(stat="identity",fill="grey") +
+  theme_bw() +  guides(fill=FALSE) + xlab("Year") + ylab("Coal Emissions")
+dev.off()
