@@ -1,0 +1,7 @@
+dat3 <- subset(NEI,fips=="24510")   ##Subsetting the rows with Maryland city
+dat.3 <- aggregate(Emissions~type+year,dat3,sum)  ##calculating the amount of emission per year on the basis of type
+
+png("plot3.R")
+ggplot(dat.3) + aes(year,Emissions) + 
+  geom_line(aes(col=type)) 
+dev.off()
