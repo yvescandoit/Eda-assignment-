@@ -1,0 +1,8 @@
+
+dat2 <- subset(NEI,fips=="24510") ## subsetting the dataset for getting the rows with fips(Maryland)
+dat2 <- aggregate(dat2$Emissions,list(dat2$year),sum) ## calculating total emission in Maryland on the basis of year 
+
+png("Plot2.R")
+Plot2.R <-plot(dat2$x,dat2$Group.1,pch=19,col="blue") ## plotting
+abline(lm(dat2$Group.1~dat2$x),lwd=4) ## annotating a regression line
+dev.off()
